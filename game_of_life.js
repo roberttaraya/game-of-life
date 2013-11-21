@@ -32,7 +32,7 @@ Cell.prototype.toggleCellStatus = function(){
   }
 };
 
-    function findNeighbors(x, y){
+    Cell.prototype.findNeighbors = function(x, y){
       if ((x===1 || x===10) && (y===1 || y===10)){
         return findNeighborsForCornerCell(x, y)
       } else if ((x===1)&&(y>=2 || y<=9)){
