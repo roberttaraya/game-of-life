@@ -32,23 +32,46 @@ Cell.prototype.toggleCellStatus = function(){
   }
 };
 
-    function findNeighbors(cellX, cellY){
-      console.log("findNeighbors: returns an array of the coordinates of a cell's 8 neighbors");
-      if
-      return ; //array of coordinate arrays for each of a cell's eight neighbors
+    function findNeighbors(x, y){
+      if ((x===1 || x===10) && (y===1 || y===10)){
+        return findNeighborsForCornerCell(x, y)
+      } else if ((x===1)&&(y>=2 || y<=9)){
+        return findNeighborsForTopEdgeCells(x, y)
+      } else if ((x===10)&&(y>=2 || y<=9)){
+        return findNeighborsForBottomEdgeCells(x, y)
+      } else if ((x>=2 || x<=9)&&(y===10)){
+        return findNeighborsForRightEdgeCells(x, y)
+      } else if ((x>=2 || x<=9)&&(y===1)){
+        return findNeighborsForLeftEdgeCells(x, y)
+      }
     }
 
-    function findCornerCell?(x, y){
-      if (x===1)&&(y===1){
+    function findNeighborsForCornerCell(x, y){
+      if (x===1 && y===1){
         return [[x, y+1], [x+1, y], [x+1, y+1]];
-      } else if (x===10)&&(y===1){
+      } else if (x===10 && y===1){
+        return [[x, y+1], [x-1, y], [x-1, y+1]];
+      } else if (x===1 && y===10){
         return [[x, y-1], [x+1, y-1], [x+1, y]];
-      } else if (x===1)&&(y===10){
-        return [[x-1, y], [x-1, y+1], [x, y+1]];
-      } else if (x===10)&&(y===10){
-        return [[x-1, y], [x-1, y-1], [x-1, y]];
+      } else if (x===10 && y===10){
+        return [[x-1, y], [x-1, y-1], [x, y-1]];
       }
-      return true;
+    }
+
+    function findNeighborsForTopEdgeCells(x, y){
+      return [[x, y-1], [x+1, y-1], [x+1, y], [x+1, y+1], [x, y+1]]
+    }
+
+    function findNeighborsForBottomEdgeCells(x, y){
+      return [[x, y-1], [x-1, y-1], [x-1, y], [x-1, y+1], [x, y+1]]
+    }
+
+    function findNeighborsForRightEdgeCells(x, y){
+      return [[x-1, y], [x-1, y-1], [x, y-1], [x+1, y-1], [x+1, y]]
+    }
+
+    function findNeighborsForLeftEdgeCells(x, y){
+      return [[x-1, y], [x-1, y+1], [x, y+1], [x+1, y+1], [x+1, y]]
     }
 
 function Board(rows, cols){
@@ -78,3 +101,4 @@ function Game(rows, cols){
 var rows = 10;
 var cols = 10;
 var game1 = new Game(rows, cols);
+debugger
