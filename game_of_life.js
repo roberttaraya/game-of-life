@@ -6,7 +6,7 @@ window.onload = function(){
 
 };
 
-function Cell(){
+var Cell = function(){
   console.log("Cell: defines a cell's attributes");
   this.cellStatus = initialCellStatus();
 }
