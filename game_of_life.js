@@ -43,6 +43,8 @@ Cell.prototype.toggleCellStatus = function(){
         return findNeighborsForRightEdgeCells(x, y)
       } else if ((x>=2 || x<=9)&&(y===1)){
         return findNeighborsForLeftEdgeCells(x, y)
+      } else {
+        return findNeighborsForCenterCells(x, y)
       }
     }
 
@@ -72,6 +74,10 @@ Cell.prototype.toggleCellStatus = function(){
 
     function findNeighborsForLeftEdgeCells(x, y){
       return [[x-1, y], [x-1, y+1], [x, y+1], [x+1, y+1], [x+1, y]]
+    }
+
+    function findNeighborsForCenterCells(x, y){
+      return [[x-1, y-1], [x-1, y], [x-1, y+1], [x, y-1], [x, y+1], [x+1, y-1], [x+1, y], [x+1, y+1]]
     }
 
 function Board(rows, cols){
