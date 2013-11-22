@@ -6,7 +6,7 @@ window.onload = function(){
 
 };
 
-function Cell(){
+var Cell = function(){
   console.log("Cell: defines a cell's attributes");
   this.cellStatus = initialCellStatus();
 }
@@ -32,8 +32,23 @@ Cell.prototype.toggleCellStatus = function(){
   }
 };
 
-    function findNeighbors(){
+    function findNeighbors(cellX, cellY){
       console.log("findNeighbors: returns an array of the coordinates of a cell's 8 neighbors");
+      if
+      return ; //array of coordinate arrays for each of a cell's eight neighbors
+    }
+
+    function findCornerCell?(x, y){
+      if (x===1)&&(y===1){
+        return [[x, y+1], [x+1, y], [x+1, y+1]];
+      } else if (x===10)&&(y===1){
+        return [[x, y-1], [x+1, y-1], [x+1, y]];
+      } else if (x===1)&&(y===10){
+        return [[x-1, y], [x-1, y+1], [x, y+1]];
+      } else if (x===10)&&(y===10){
+        return [[x-1, y], [x-1, y-1], [x-1, y]];
+      }
+      return true;
     }
 
 function Board(rows, cols){
