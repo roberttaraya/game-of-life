@@ -23,7 +23,23 @@ Cell.prototype.toggleCellStatus = function(){
   } else {
     this.cellStatus = true;
   }
-};
+}
+
+Cell.prototype.findLiveNeighbors = function (x, y){
+  var activeCells = 0
+  var neighborsArray = this.findNeighbors(x, y)
+  var cellId = ""
+  neighborsArray.forEach(function(cell){
+    cellId = cellId + "row" + cell[0]
+    cellId = cellId + "col" + cell[1]
+    neighborCell = document.getElementById(cellId)
+    if (neighborCell.className==='active'){
+      activeCells += 1
+    }
+    cellId = ""
+  })
+  return activeCells
+}
 
 Cell.prototype.findNeighbors = function(x, y){
   if ((x===1 || x===this.maxRows) && (y===1 || y===this.maxCols)){
