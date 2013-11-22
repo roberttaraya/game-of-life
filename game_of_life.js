@@ -1,15 +1,14 @@
 window.onload = function(){
   console.log('window loaded!');
-  var cell = new Cell()
-  var board = new Board(20, 25)
-  var game = new Game()
-  debugger
 
+  var game = new Game(20,25)
 };
 
-var Cell = function(){
+var Cell = function(rows,cols){
   console.log("Cell: defines a cell's attributes");
   this.cellStatus = initialCellStatus();
+  this.maxRows = rows
+  this.maxCols = cols
 }
 
 function initialCellStatus(){
@@ -34,50 +33,50 @@ Cell.prototype.toggleCellStatus = function(){
 };
 
 Cell.prototype.findNeighbors = function(x, y){
-  if ((x===1 || x===10) && (y===1 || y===10)){
-    return findNeighborsForCornerCell(x, y)
-  } else if ((x===1)&&(y>=2 || y<=9)){
-    return findNeighborsForTopEdgeCells(x, y)
-  } else if ((x===10)&&(y>=2 || y<=9)){
-    return findNeighborsForBottomEdgeCells(x, y)
-  } else if ((x>=2 || x<=9)&&(y===10)){
-    return findNeighborsForRightEdgeCells(x, y)
-  } else if ((x>=2 || x<=9)&&(y===1)){
-    return findNeighborsForLeftEdgeCells(x, y)
+  if ((x===1 || x===this.maxRows) && (y===1 || y===this.maxCols)){
+    return this.findNeighborsForCornerCell(x, y)
+  } else if ((x===1)&&(y>=2 || y<=this.maxCols-1)){
+    return this.findNeighborsForTopEdgeCells(x, y)
+  } else if ((x===this.maxRows)&&(y>=2 || y<=this.maxCols-1)){
+    return this.findNeighborsForBottomEdgeCells(x, y)
+  } else if ((x>=2 || x<=this.maxRows-1)&&(y===this.maxCols)){
+    return this.findNeighborsForRightEdgeCells(x, y)
+  } else if ((x>=2 || x<=this.maxRows-1)&&(y===1)){
+    return this.findNeighborsForLeftEdgeCells(x, y)
   } else {
-    return findNeighborsForCenterCells(x, y)
+    return this.findNeighborsForCenterCells(x, y)
   }
 }
 
-    function findNeighborsForCornerCell(x, y){
+    Cell.prototype.findNeighborsForCornerCell = function(x, y){
       if (x===1 && y===1){
         return [[x, y+1], [x+1, y], [x+1, y+1]];
-      } else if (x===10 && y===1){
+      } else if (x===this.maxRows && y===1){
         return [[x, y+1], [x-1, y], [x-1, y+1]];
-      } else if (x===1 && y===10){
+      } else if (x===1 && y===this.maxCols){
         return [[x, y-1], [x+1, y-1], [x+1, y]];
-      } else if (x===10 && y===10){
+      } else if (x===this.maxRows && y===this.maxCols){
         return [[x-1, y], [x-1, y-1], [x, y-1]];
       }
     }
 
-    function findNeighborsForTopEdgeCells(x, y){
+    Cell.prototype.findNeighborsForTopEdgeCells = function(x, y){
       return [[x, y-1], [x+1, y-1], [x+1, y], [x+1, y+1], [x, y+1]]
     }
 
-    function findNeighborsForBottomEdgeCells(x, y){
+    Cell.prototype.findNeighborsForBottomEdgeCells = function(x, y){
       return [[x, y-1], [x-1, y-1], [x-1, y], [x-1, y+1], [x, y+1]]
     }
 
-    function findNeighborsForRightEdgeCells(x, y){
+    Cell.prototype.findNeighborsForRightEdgeCells = function(x, y){
       return [[x-1, y], [x-1, y-1], [x, y-1], [x+1, y-1], [x+1, y]]
     }
 
-    function findNeighborsForLeftEdgeCells(x, y){
+    Cell.prototype.findNeighborsForLeftEdgeCells = function(x, y){
       return [[x-1, y], [x-1, y+1], [x, y+1], [x+1, y+1], [x+1, y]]
     }
 
-    function findNeighborsForCenterCells(x, y){
+    Cell.prototype.findNeighborsForCenterCells = function(x, y){
       return [[x-1, y-1], [x-1, y], [x-1, y+1], [x, y-1], [x, y+1], [x+1, y-1], [x+1, y], [x+1, y+1]]
     }
 
@@ -114,13 +113,12 @@ var Board = function(maxRows, maxCols){
       table.innerHTML = addRows
     }
 
-var Game = function(){
-  // this.cell = new Cell();
-  // this.board = new Board(rows, cols);
+var Game = function(rows,cols){
   console.log("Game: a new game has started");
+  var cell = new Cell(rows,cols)
+  var board = new Board(rows,cols)
 }
 
 var rows = 10;
 var cols = 10;
 // var game1 = new Game(rows, cols);
-// debugger
