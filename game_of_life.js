@@ -8,6 +8,7 @@ window.onload = function(){
 
 var Game = function(rows,cols){
   console.log("Game: a new game has started");
-  var cell = new Cell(rows,cols)
-  var board = new Board(rows,cols)
+  this.board = new Board(rows,cols)
 }
+
+game.prototype

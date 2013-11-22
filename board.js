@@ -18,17 +18,14 @@ Board.prototype.createRowsAndCols = function(rows,cols){
   var addCols = ""
   for(var i=1; i<=rows; i++){
     for (var j=1; j<=cols; j++){
-      var cell = new Cell
       addCols = addCols + "<td "
       addCols = addCols + "id='row" + i + "col" + j + "' "
       addCols = addCols + "height='" + this.cellHeight + "' "
       addCols = addCols + "width='" + this.cellWidth + "' "
       var cell = new Cell()
       if(cell.cellStatus===true){
-        console.log("i'm true")
         addCols = addCols + "class='active'"
       } else {
-        console.log("i'm false")
         addCols = addCols + "class='inactive'"
       }
       addCols = addCols + ">"
