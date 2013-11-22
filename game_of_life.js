@@ -1,7 +1,8 @@
 window.onload = function(){
   console.log('window loaded!');
-
-
+  var cell = new Cell()
+  var board = new Board(rows, cols)
+  var game = new Game()
 
 
 };
@@ -32,49 +33,81 @@ Cell.prototype.toggleCellStatus = function(){
   }
 };
 
-    function findNeighbors(cellX, cellY){
-      console.log("findNeighbors: returns an array of the coordinates of a cell's 8 neighbors");
-      if
-      return ; //array of coordinate arrays for each of a cell's eight neighbors
-    }
+Cell.prototype.findNeighbors = function(x, y){
+  if ((x===1 || x===10) && (y===1 || y===10)){
+    return findNeighborsForCornerCell(x, y)
+  } else if ((x===1)&&(y>=2 || y<=9)){
+    return findNeighborsForTopEdgeCells(x, y)
+  } else if ((x===10)&&(y>=2 || y<=9)){
+    return findNeighborsForBottomEdgeCells(x, y)
+  } else if ((x>=2 || x<=9)&&(y===10)){
+    return findNeighborsForRightEdgeCells(x, y)
+  } else if ((x>=2 || x<=9)&&(y===1)){
+    return findNeighborsForLeftEdgeCells(x, y)
+  } else {
+    return findNeighborsForCenterCells(x, y)
+  }
+}
 
-    function findCornerCell?(x, y){
-      if (x===1)&&(y===1){
+    function findNeighborsForCornerCell(x, y){
+      if (x===1 && y===1){
         return [[x, y+1], [x+1, y], [x+1, y+1]];
-      } else if (x===10)&&(y===1){
+      } else if (x===10 && y===1){
+        return [[x, y+1], [x-1, y], [x-1, y+1]];
+      } else if (x===1 && y===10){
         return [[x, y-1], [x+1, y-1], [x+1, y]];
-      } else if (x===1)&&(y===10){
-        return [[x-1, y], [x-1, y+1], [x, y+1]];
-      } else if (x===10)&&(y===10){
-        return [[x-1, y], [x-1, y-1], [x-1, y]];
+      } else if (x===10 && y===10){
+        return [[x-1, y], [x-1, y-1], [x, y-1]];
       }
-      return true;
     }
 
-function Board(rows, cols){
+    function findNeighborsForTopEdgeCells(x, y){
+      return [[x, y-1], [x+1, y-1], [x+1, y], [x+1, y+1], [x, y+1]]
+    }
+
+    function findNeighborsForBottomEdgeCells(x, y){
+      return [[x, y-1], [x-1, y-1], [x-1, y], [x-1, y+1], [x, y+1]]
+    }
+
+    function findNeighborsForRightEdgeCells(x, y){
+      return [[x-1, y], [x-1, y-1], [x, y-1], [x+1, y-1], [x+1, y]]
+    }
+
+    function findNeighborsForLeftEdgeCells(x, y){
+      return [[x-1, y], [x-1, y+1], [x, y+1], [x+1, y+1], [x+1, y]]
+    }
+
+    function findNeighborsForCenterCells(x, y){
+      return [[x-1, y-1], [x-1, y], [x-1, y+1], [x, y-1], [x, y+1], [x+1, y-1], [x+1, y], [x+1, y+1]]
+    }
+
+var Board = function(maxRows, maxCols){
   console.log("Board: given a number of rows and columns, defines the size of the board");
-  console.log("a board with " +rows+ " rows was created");
-  console.log("a board with " +cols+ " cols was created");
+  this.maxRows = maxRows
+  console.log("a board with " +maxRows+ " rows was created");
+  this.maxCols = maxCols
+  console.log("a board with " +maxCols+ " cols was created");
 }
 
     function createTable(rows, cols){
       console.log("createTable: creates a table given number of rows and columns");
     }
 
-    function defineRows(rows){
+    function createRows(rows){
       console.log("defineRows: sets number of rows on the board as defined by the player");
     }
 
-    function defineColumns(cols){
+    function createColumns(cols){
       console.log("defineCols: sets number of cols on the board as defined by the player");
     }
 
-function Game(rows, cols){
-  var cell = new Cell();
-  var board = new Board(rows, cols);
-  console.log("a new game has started");
+var Game = function(){
+  // this.cell = new Cell();
+  // this.board = new Board(rows, cols);
+  console.log("Game: a new game has started");
 }
 
 var rows = 10;
 var cols = 10;
-var game1 = new Game(rows, cols);
+// var game1 = new Game(rows, cols);
+// debugger
