@@ -1,9 +1,9 @@
 window.onload = function(){
   console.log('window loaded!');
   var cell = new Cell()
-  var board = new Board(rows, cols)
+  var board = new Board(20, 25)
   var game = new Game()
-
+  debugger
 
 };
 
@@ -82,23 +82,36 @@ Cell.prototype.findNeighbors = function(x, y){
     }
 
 var Board = function(maxRows, maxCols){
-  console.log("Board: given a number of rows and columns, defines the size of the board");
   this.maxRows = maxRows
   console.log("a board with " +maxRows+ " rows was created");
   this.maxCols = maxCols
   console.log("a board with " +maxCols+ " cols was created");
+  this.createTable(maxRows,maxCols)
+  this.cellHeight = 75
+  this.cellWidth = 75
 }
 
-    function createTable(rows, cols){
+    Board.prototype.createTable = function(rows,cols){
       console.log("createTable: creates a table given number of rows and columns");
+      tableElement = "<table id='game-table' border='3'></table>"
+      divContainer = $('#test-board-container')
+      divContainer.html(tableElement)
+      this.createRowsAndCols(rows,cols)
     }
 
-    function createRows(rows){
+    Board.prototype.createRowsAndCols = function(rows,cols){
       console.log("defineRows: sets number of rows on the board as defined by the player");
-    }
-
-    function createColumns(cols){
-      console.log("defineCols: sets number of cols on the board as defined by the player");
+      var addRows = ""
+      var addCols = ""
+      for(var i=1; i<=rows; i++){
+        for (var j=1; j<=cols; j++){
+          addCols = addCols + "<td id='col" + j + "' height='" + this.cellHeight + "' width='" + this.cellWidth + "'>" + i + ", " + j + "</td>"
+        }
+        addRows = addRows + "<tr id='row" + i + "' class='cells'>" + addCols + "</tr>"
+        addCols = ""
+      }
+      var table = document.getElementById('game-table')
+      table.innerHTML = addRows
     }
 
 var Game = function(){
