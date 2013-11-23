@@ -1,9 +1,15 @@
+body{
+  background-color: gray;
+}
+
 div {
   margin: 5em;
 }
 
 table {
   font-size: 12px;
+  border: 1px solid white;
+  background-color: white;
 }
 
 .active{

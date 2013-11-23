@@ -13,16 +13,16 @@ function initialCellStatus(){
 }
 
 function randomNumber(){
-  return Math.floor( Math.random() * 3 )+1;
+  return Math.floor( Math.random() * 10 )+1;
 }
 
-Cell.prototype.toggleCellStatus = function(){
-  if (this.cellStatus === true){
-    this.cellStatus = false;
-  } else {
-    this.cellStatus = true;
-  }
-}
+// Cell.prototype.toggleCellStatus = function(){
+//   if (this.cellStatus === true){
+//     this.cellStatus = false;
+//   } else {
+//     this.cellStatus = true;
+//   }
+// }
 
 Cell.prototype.findLiveNeighbors = function (x, y){
   var activeCells = 0
