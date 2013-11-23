@@ -1,17 +1,20 @@
 window.onload = function(){
-  var game = new Game(20,25)
-  game.runIT(20,55)
+  var game = new Game(75,150)
 };
 
 
 var Game = function(rows,cols){
+  this.timeInterval = 500
+  this.maxRows = rows
+  this.maxCols = cols
   this.cell = new Cell(rows,cols)
   this.board = new Board(rows,cols)
+  this.runIT(rows,cols)
 }
 
 Game.prototype.cellLiveOrDie = function(rows, cols){
-  for (var x=1; x<=20; x++){
-    for (var y=1; y<=25; y++){
+  for (var x=1; x<=this.maxRows; x++){
+    for (var y=1; y<=this.maxCols; y++){
       var liveCellCount = this.cell.findLiveNeighbors(x,y)
       var cellId = ""
       cellId = cellId + "row" + x
@@ -45,7 +48,7 @@ Game.prototype.runIT = function(rows, cols){
     self.cellLiveOrDie(rows, cols)
     count += 1
     console.log("count:", count)
-  }, 500)
+  }, this.timeInterval)
     // oldTable = newTable
     // newTable = document.getElementById("game-table")
   // }
