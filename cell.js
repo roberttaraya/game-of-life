@@ -17,7 +17,6 @@ function randomNumber(){
 }
 
 Cell.prototype.toggleCellStatus = function(){
-  console.log("toggleCellStatus: changes the cell status from dead to alive or vice versa");
   if (this.cellStatus === true){
     this.cellStatus = false;
   } else {
@@ -28,15 +27,14 @@ Cell.prototype.toggleCellStatus = function(){
 Cell.prototype.findLiveNeighbors = function (x, y){
   var activeCells = 0
   var neighborsArray = this.findNeighbors(x, y)
-  var cellId = ""
   neighborsArray.forEach(function(cell){
+    var cellId = ""
     cellId = cellId + "row" + cell[0]
     cellId = cellId + "col" + cell[1]
     neighborCell = document.getElementById(cellId)
     if (neighborCell.className==='active'){
       activeCells += 1
     }
-    cellId = ""
   })
   return activeCells
 }
