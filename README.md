@@ -3,6 +3,7 @@ game_of_life
 
 This is my attempt at simulating Conway's Game of Life in Javascript
 
+![Game of Life Screenshot](https://drive.google.com/file/d/0B3L6WzP1P-KjLVlESG0xVEpuZnM/edit?usp=sharing)
 
 From Wikipedia
 --------------
