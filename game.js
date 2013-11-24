@@ -39,9 +39,18 @@ Game.prototype.runIT = function(rows, cols){
   setInterval(function(){
     self.cellLiveOrDie(rows, cols)
     count += 1
-    console.log("count:", count)
+    self.displayGenerationCounter(count)
   }, this.timeInterval)
     // oldTable = newTable
     // newTable = document.getElementById("game-table")
   // }
+}
+
+Game.prototype.displayGenerationCounter = function(count){
+  var counter = $("#generation-container")
+  var output = ""
+  output = output + "<h2>"
+  output = output + "Generation: " + count
+  output = output + "</h2>"
+  counter.html(output)
 }

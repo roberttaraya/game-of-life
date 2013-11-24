@@ -6,6 +6,21 @@ div {
   margin: 5em;
 }
 
+#container{
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+}
+
+#game-container{
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+}
+
+#generation-container{
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+}
+
 table {
   font-size: 12px;
   border: 1px solid white;
