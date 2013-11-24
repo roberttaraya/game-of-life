@@ -1,28 +1,7 @@
 var Cell = function(rows,cols){
-  this.cellStatus = initialCellStatus();
   this.maxRows = rows
   this.maxCols = cols
 }
-
-function initialCellStatus(){
-  if (randomNumber() === 1){
-    return true;
-  } else {
-    return false;
-  }
-}
-
-function randomNumber(){
-  return Math.floor( Math.random() * 15 )+1;
-}
-
-// Cell.prototype.toggleCellStatus = function(){
-//   if (this.cellStatus === true){
-//     this.cellStatus = false;
-//   } else {
-//     this.cellStatus = true;
-//   }
-// }
 
 Cell.prototype.findLiveNeighbors = function (x, y){
   var self = this
