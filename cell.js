@@ -13,7 +13,7 @@ function initialCellStatus(){
 }
 
 function randomNumber(){
-  return Math.floor( Math.random() * 10 )+1;
+  return Math.floor( Math.random() * 15 )+1;
 }
 
 // Cell.prototype.toggleCellStatus = function(){
@@ -25,18 +25,26 @@ function randomNumber(){
 // }
 
 Cell.prototype.findLiveNeighbors = function (x, y){
+  var self = this
   var activeCells = 0
   var neighborsArray = this.findNeighbors(x, y)
   neighborsArray.forEach(function(cell){
-    var cellId = ""
-    cellId = cellId + "row" + cell[0]
-    cellId = cellId + "col" + cell[1]
-    neighborCell = document.getElementById(cellId)
-    if (neighborCell.className==='active'){
+    var x = cell[0]
+    var y = cell[1]
+    var neighborCell = self.buildCellId(x, y)
+    if (neighborCell.attr('class')==='active'){
       activeCells += 1
     }
   })
   return activeCells
+}
+
+Cell.prototype.buildCellId = function(x, y){
+  var cellId = ""
+  cellId = cellId + "#"
+  cellId = cellId + "row" + x
+  cellId = cellId + "col" + y
+  return $(cellId)
 }
 
 Cell.prototype.findNeighbors = function(x, y){
