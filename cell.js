@@ -29,19 +29,22 @@ Cell.prototype.findLiveNeighbors = function (x, y){
   var activeCells = 0
   var neighborsArray = this.findNeighbors(x, y)
   neighborsArray.forEach(function(cell){
-    var neighborCell = self.buildCellId(cell)
-    if (neighborCell.className==='active'){
+    var x = cell[0]
+    var y = cell[1]
+    var neighborCell = self.buildCellId(x, y)
+    if (neighborCell.attr('class')==='active'){
       activeCells += 1
     }
   })
   return activeCells
 }
 
-Cell.prototype.buildCellId = function(cell){
+Cell.prototype.buildCellId = function(x, y){
   var cellId = ""
-  cellId = cellId + "row" + cell[0]
-  cellId = cellId + "col" + cell[1]
-  return document.getElementById(cellId)
+  cellId = cellId + "#"
+  cellId = cellId + "row" + x
+  cellId = cellId + "col" + y
+  return $(cellId)
 }
 
 Cell.prototype.findNeighbors = function(x, y){

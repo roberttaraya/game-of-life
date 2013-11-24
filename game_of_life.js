@@ -16,21 +16,18 @@ Game.prototype.cellLiveOrDie = function(rows, cols){
   for (var x=1; x<=this.maxRows; x++){
     for (var y=1; y<=this.maxCols; y++){
       var liveCellCount = this.cell.findLiveNeighbors(x,y)
-      var cellId = ""
-      cellId = cellId + "row" + x
-      cellId = cellId + "col" + y
-      cellInQuestion = document.getElementById(cellId)
-      if (cellInQuestion.className==='active'){
+      var cellInQuestion = this.cell.buildCellId(x, y)
+      if (cellInQuestion.attr('class')==='active'){
         if (liveCellCount < 2){
-          cellInQuestion.className='inactive'
+          cellInQuestion.attr('class', 'inactive')
         } else if (liveCellCount === 2 || liveCellCount === 3){
-          cellInQuestion.className='active'
+          cellInQuestion.attr('class', 'active')
         } else if (liveCellCount > 3){
-          cellInQuestion.className='inactive'
+          cellInQuestion.attr('class', 'inactive')
         }
       } else {
         if (liveCellCount === 3){
-          cellInQuestion.className='active'
+          cellInQuestion.attr('class', 'active')
         }
       }
     }
