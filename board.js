@@ -18,10 +18,9 @@ Board.prototype.createRowsAndColsOfGameTable = function(rows,cols){
     for (var j=1; j<=cols; j++){
       addCols = addCols + "<td "
       addCols = addCols + "id='row" + i + "col" + j + "' "
-      addCols = addCols + "height='4' "
-      addCols = addCols + "width='4' "
-      var cell = new Cell()
-      if(cell.cellStatus===true){
+      addCols = addCols + "height='3' "
+      addCols = addCols + "width='3' "
+      if(this.initializeCellState()===true){
         addCols = addCols + "class='active'"
       } else {
         addCols = addCols + "class='inactive'"
@@ -34,4 +33,13 @@ Board.prototype.createRowsAndColsOfGameTable = function(rows,cols){
   }
   var table = $('#game-table')
   table.html(addRows)
+}
+
+Board.prototype.initializeCellState = function(){
+  var randomNum = Math.floor( Math.random() * 15 )+1;
+  if (randomNum===1){
+    return true
+  } else {
+    return false
+  }
 }
