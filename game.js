@@ -75,12 +75,12 @@ Game.prototype.randomInitialCellState = function(){
 }
 
 Game.prototype.acornInitialCellState = function(){
-  var acornInitialCoordinates = [ [58, 107], [59, 109], [60, 106], [60, 107], [60, 110], [60, 111], [60, 112] ]
+  var acornInitialCoordinates = [ [38, 107], [39, 109], [40, 106], [40, 107], [40, 110], [40, 111], [40, 112] ]
   return acornInitialCoordinates
 }
 
 Game.prototype.rPentominoInitialCellState = function(){
-  var rPentominoInitialCoordinates = [ [59, 81], [59, 82], [60, 80], [60, 81], [61, 81]]
+  var rPentominoInitialCoordinates = [ [39, 81], [39, 82], [40, 80], [40, 81], [41, 81]]
   return rPentominoInitialCoordinates
 }
 
