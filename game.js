@@ -73,18 +73,30 @@ Game.prototype.randomInitialCellState = function(){
   return randomInitialCoordinates
 }
 
+Game.prototype.gliderInitialCellState = function(){
+  var x = this.maxRows/2
+  var y = this.maxCols/2
+  var acornInitialCoordinates = [ [x-1, y], [x, y+1], [x+1, y-1], [x+1, y], [x+1, y+1] ]
+  return acornInitialCoordinates
+}
+
 Game.prototype.acornInitialCellState = function(){
-  var acornInitialCoordinates = [ [38, 107], [39, 109], [40, 106], [40, 107], [40, 110], [40, 111], [40, 112] ]
+  var x = this.maxRows/2
+  var y = Math.floor(this.maxCols*2/3)
+  var acornInitialCoordinates = [ [x-1, y+1], [x, y+3], [x+1, y], [x+1, y+1], [x+1, y+4], [x+1, y+5], [x+1, y+6] ]
   return acornInitialCoordinates
 }
 
 Game.prototype.rPentominoInitialCellState = function(){
-  var rPentominoInitialCoordinates = [ [39, 81], [39, 82], [40, 80], [40, 81], [41, 81]]
+  var x = this.maxRows/2
+  var y = this.maxCols/2
+  var rPentominoInitialCoordinates = [ [x-1, y+1], [x-1, y+2], [x, y], [x, y+1], [x+1, y+1]]
   return rPentominoInitialCoordinates
 }
 
-Game.prototype.setCellState = function(liveCellArray){
+Game.prototype.setLiveCellState = function(liveCellArray){
   var self = this
+  this.board.clearGameTable()
   liveCellArray.forEach(function(liveCell){
     var x = liveCell[0]
     var y = liveCell[1]
