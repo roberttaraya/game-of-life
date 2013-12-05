@@ -1,9 +1,10 @@
-var Game = function(rows,cols){
+var Game = function(){
   this.timeInterval = 500
-  this.maxRows = rows
-  this.maxCols = cols
-  this.cell = new Cell(rows,cols)
-  this.board = new Board(rows,cols)
+  this.maxRows = 80
+  this.maxCols = 160
+  this.cell = new Cell(this.maxRows, this.maxCols)
+  this.board = new Board(this.maxRows, this.maxCols)
+  debugger
   this.runIT(rows,cols)
 }
 
