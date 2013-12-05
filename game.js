@@ -7,26 +7,24 @@ var Game = function(){
   this.runIT(this.maxRows, this.maxCols)
 }
 
-Game.prototype.cellLiveOrDie = function(rows, cols){
+Game.prototype.cellLiveOrDie = function(){
+  var cellsToStayAliveArray = []
   for (var x=1; x<=this.maxRows; x++){
     for (var y=1; y<=this.maxCols; y++){
       var liveCellCount = this.cell.findLiveNeighbors(x,y)
       var cellInQuestion = this.cell.buildCellId(x, y)
       if (cellInQuestion.attr('class')==='active'){
-        if (liveCellCount < 2){
-          cellInQuestion.attr('class', 'inactive')
-        } else if (liveCellCount === 2 || liveCellCount === 3){
-          cellInQuestion.attr('class', 'active')
-        } else if (liveCellCount > 3){
-          cellInQuestion.attr('class', 'inactive')
+        if (liveCellCount === 2 || liveCellCount === 3){
+          cellsToStayAliveArray.push([x,y])
         }
       } else {
         if (liveCellCount === 3){
-          cellInQuestion.attr('class', 'active')
+          cellsToStayAliveArray.push([x,y])
         }
       }
     }
   }
+  this.setLiveCellState(cellsToStayAliveArray)
 }
 
 Game.prototype.runIT = function(rows, cols){
