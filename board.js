@@ -31,3 +31,20 @@ Board.prototype.createRowsAndColsOfGameTable = function(rows,cols){
   table.html(addRows)
 }
 
+Board.prototype.buildCellId = function(x, y){
+  var cellId = ""
+  cellId = cellId + "#"
+  cellId = cellId + "row" + x
+  cellId = cellId + "col" + y
+  return $(cellId)
+}
+
+Board.prototype.clearGameTable = function(){
+  for (var x=1; x<=this.maxRows; x++){
+    for (var y=1; y<=this.maxCols; y++){
+      var cell = this.buildCellId(x,y)
+      cell.attr("class", "inactive")
+    }
+  }
+}
+
