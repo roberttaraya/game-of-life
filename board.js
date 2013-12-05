@@ -20,13 +20,9 @@ Board.prototype.createRowsAndColsOfGameTable = function(rows,cols){
       addCols = addCols + "id='row" + i + "col" + j + "' "
       addCols = addCols + "height='3' "
       addCols = addCols + "width='3' "
-      // if(this.initializeCellState()===true){
-        // addCols = addCols + "class='active'"
-      // } else {
-        addCols = addCols + "class='inactive'"
-      // }
+      addCols = addCols + "class='inactive'"
       addCols = addCols + ">"
-      addCols = addCols + i + ", " + j
+      // addCols = addCols + i + ", " + j
       addCols = addCols + "</td>"
     }
     addRows = addRows + "<tr id='row" + i + "' class='cells'>" + addCols + "</tr>"

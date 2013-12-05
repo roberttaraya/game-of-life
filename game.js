@@ -4,8 +4,7 @@ var Game = function(){
   this.maxCols = 160
   this.cell = new Cell(this.maxRows, this.maxCols)
   this.board = new Board(this.maxRows, this.maxCols)
-  debugger
-  this.runIT(rows,cols)
+  this.runIT(this.maxRows, this.maxCols)
 }
 
 Game.prototype.cellLiveOrDie = function(rows, cols){
@@ -31,12 +30,14 @@ Game.prototype.cellLiveOrDie = function(rows, cols){
 }
 
 Game.prototype.runIT = function(rows, cols){
-  var oldTable = ""
-  var newTable = document.getElementById("game-table")
+  // var oldTable = ""
+  // var newTable = document.getElementById("game-table")
   var count = 0
   // while(oldTable !== newTable){
   // for (var i = 1; i <= 1000; i++){
   var self = this
+  var initialCellStateArray = this.acornInitialCellState()
+  this.setCellState(initialCellStateArray)
   setInterval(function(){
     self.cellLiveOrDie(rows, cols)
     count += 1
@@ -64,7 +65,7 @@ Game.prototype.randomNum = function(){
 Game.prototype.randomInitialCellState = function(){
   var randomInitialCoordinates = []
   for (var x=1; x<=this.maxRows; x++){
-    for (var y=1; y<=this.maxRows; y++){
+    for (var y=1; y<=this.maxCols; y++){
       var num = this.randomNum()
       if (num===1){
         randomInitialCoordinates.push([x,y])
@@ -84,9 +85,12 @@ Game.prototype.rPentominoInitialCellState = function(){
   return rPentominoInitialCoordinates
 }
 
-Board.prototype.drawInitialCellState = function(rows,cols){
-  tableElement = "<table id='game-table' border='3'></table>"
-  divContainer = $('#game-container')
-  divContainer.html(tableElement)
-  this.createRowsAndColsOfGameTable(rows,cols)
+Game.prototype.setCellState = function(liveCellArray){
+  var self = this
+  liveCellArray.forEach(function(liveCell){
+    var x = liveCell[0]
+    var y = liveCell[1]
+    var cellState = self.cell.buildCellId(x, y)
+    cellState.attr('class', 'active')
+  })
 }
