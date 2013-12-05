@@ -34,10 +34,10 @@ Game.prototype.runIT = function(rows, cols){
   // while(oldTable !== newTable){
   // for (var i = 1; i <= 1000; i++){
   var self = this
-  var initialCellStateArray = this.acornInitialCellState()
-  this.setCellState(initialCellStateArray)
+  var initialCellStateArray = this.rPentominoInitialCellState()
+  this.setLiveCellState(initialCellStateArray)
   setInterval(function(){
-    self.cellLiveOrDie(rows, cols)
+    self.cellLiveOrDie()
     count += 1
     self.displayGenerationCounter(count)
   }, this.timeInterval)
