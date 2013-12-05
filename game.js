@@ -54,3 +54,27 @@ Game.prototype.displayGenerationCounter = function(count){
   output = output + "</h2>"
   counter.html(output)
 }
+
+Game.prototype.randomInitialCellState = function(){
+  var randomNum = Math.floor( Math.random() * 15 )+1;
+  if (randomNum===1){
+    return true
+  } else {
+    return false
+  }
+}
+
+Game.prototype.acornInitialCellState = function(){
+  var acornInitialCoordinates = [ [58, 107], [59, 109], [60, 106], [60, 107], [60, 110], [60, 111], [60, 112] ]
+}
+
+Game.prototype.rPentomino = function(){
+  var rPentominoInitialCoordinates = [ [59, 81], [59, 82], [60, 80], [60, 81], [61, 81]]
+}
+
+Board.prototype.drawInitialCellState = function(rows,cols){
+  tableElement = "<table id='game-table' border='3'></table>"
+  divContainer = $('#game-container')
+  divContainer.html(tableElement)
+  this.createRowsAndColsOfGameTable(rows,cols)
+}

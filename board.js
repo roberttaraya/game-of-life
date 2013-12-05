@@ -20,13 +20,13 @@ Board.prototype.createRowsAndColsOfGameTable = function(rows,cols){
       addCols = addCols + "id='row" + i + "col" + j + "' "
       addCols = addCols + "height='3' "
       addCols = addCols + "width='3' "
-      if(this.initializeCellState()===true){
-        addCols = addCols + "class='active'"
-      } else {
+      // if(this.initializeCellState()===true){
+        // addCols = addCols + "class='active'"
+      // } else {
         addCols = addCols + "class='inactive'"
-      }
+      // }
       addCols = addCols + ">"
-      // addCols = addCols + i + ", " + j
+      addCols = addCols + i + ", " + j
       addCols = addCols + "</td>"
     }
     addRows = addRows + "<tr id='row" + i + "' class='cells'>" + addCols + "</tr>"
@@ -35,11 +35,3 @@ Board.prototype.createRowsAndColsOfGameTable = function(rows,cols){
   table.html(addRows)
 }
 
-Board.prototype.initializeCellState = function(){
-  var randomNum = Math.floor( Math.random() * 15 )+1;
-  if (randomNum===1){
-    return true
-  } else {
-    return false
-  }
-}
