@@ -56,9 +56,9 @@ Game.prototype.runIT = function(rows, cols){
   // while(oldTable !== newTable){
   // for (var i = 1; i <= 1000; i++){
   var self = this
-  this.cellsToStayAliveArray = this.randomInitialCellState()
+  // this.cellsToStayAliveArray = this.randomInitialCellState()
   // this.cellsToStayAliveArray = this.gliderInitialCellState()
-  // this.cellsToStayAliveArray = this.acornInitialCellState()
+  this.cellsToStayAliveArray = this.acornInitialCellState()
   // this.cellsToStayAliveArray = this.rPentominoInitialCellState()
   // this.cellsToStayAliveArray = this.gosperGliderGunInitialCellState()
   this.setCellState()
