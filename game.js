@@ -82,7 +82,7 @@ Game.prototype.displayGenerationCounter = function(count){
 }
 
 Game.prototype.randomNum = function(){
-  var randomNum = Math.floor( Math.random() * 15 )+1
+  var randomNum = Math.floor( Math.random() * 5 )+1
   return randomNum
 }
 
