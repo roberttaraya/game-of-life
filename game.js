@@ -34,7 +34,11 @@ Game.prototype.runIT = function(rows, cols){
   // while(oldTable !== newTable){
   // for (var i = 1; i <= 1000; i++){
   var self = this
-  var initialCellStateArray = this.rPentominoInitialCellState()
+  // var initialCellStateArray = this.randomInitialCellState()
+  // var initialCellStateArray = this.gliderInitialCellState()
+  // var initialCellStateArray = this.acornInitialCellState()
+  // var initialCellStateArray = this.rPentominoInitialCellState()
+  var initialCellStateArray = this.gosperGliderGunInitialCellState()
   this.setLiveCellState(initialCellStateArray)
   setInterval(function(){
     self.cellLiveOrDie()
@@ -92,6 +96,21 @@ Game.prototype.rPentominoInitialCellState = function(){
   var y = this.maxCols/2
   var rPentominoInitialCoordinates = [ [x-1, y+1], [x-1, y+2], [x, y], [x, y+1], [x+1, y+1]]
   return rPentominoInitialCoordinates
+}
+
+Game.prototype.gosperGliderGunInitialCellState = function(){
+  var x = Math.floor(this.maxRows/2)
+  var y = Math.floor(this.maxCols/6)
+  var gosperGliderGunInitialCoordinates = [ [x-5, y+24],
+                                            [x-4, y+22], [x-4, y+24],
+                                            [x-3, y+12], [x-3, y+13], [x-3, y+20], [x-3, y+21], [x-3, y+34], [x-3, y+35],
+                                            [x-2, y+11], [x-2, y+15], [x-2, y+20], [x-2, y+21], [x-2, y+34], [x-2, y+35],
+                                            [x-1, y], [x-1, y+1], [x-1, y+10], [x-1, y+16], [x-1, y+20], [x-1, y+21],
+                                            [x, y], [x, y+1], [x, y+10], [x, y+14], [x, y+16], [x, y+17], [x, y+22], [x, y+24],
+                                            [x+1, y+10], [x+1, y+16], [x+1, y+24],
+                                            [x+2, y+11], [x+2, y+15],
+                                            [x+3, y+12], [x+3, y+13] ]
+  return gosperGliderGunInitialCoordinates
 }
 
 Game.prototype.setLiveCellState = function(liveCellArray){
