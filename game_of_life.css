@@ -7,18 +7,55 @@ div {
 }
 
 #container{
-  margin: 0 0 0 0;
+  margin: 10px;
   padding: 0 0 0 0;
 }
 
 #game-container{
+  width: 1200px;
   margin: 0 0 0 0;
   padding: 0 0 0 0;
+  border: 1px solid black;
+}
+
+#controls{
+  width: 1200px;
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  position: absolute;
+  border: 1px solid black;
 }
 
 #generation-container{
+  width: 225px;
+  position: relative;
+  float: left;
   margin: 0 0 0 0;
   padding: 0 0 0 0;
+  border: 1px solid black;
+  display: inline;
+}
+
+#pattern-list{
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  position: relative;
+  width: 800px;
+  float: right;
+  border: 1px solid black;
+}
+
+ul{
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  float: left;
+  list-style: none;
+}
+
+ul li {
+  float: left;
+  border: 1px solid black;
+  padding: 0 20px;
 }
 
 table {
