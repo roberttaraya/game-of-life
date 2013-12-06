@@ -135,10 +135,19 @@ Game.prototype.gosperGliderGunInitialCellState = function(){
   return gosperGliderGunInitialCoordinates
 }
 
-Game.prototype.setLiveCellState = function(liveCellArray){
+Game.prototype.setCellState = function(){
   var self = this
-  this.board.clearGameTable()
-  liveCellArray.forEach(function(liveCell){
+  if (self.cellsToDieArray.length===0){
+    self.board.clearGameTable()
+  } else {
+    self.cellsToDieArray.forEach(function(cellToDie){
+      var x = cellToDie[0]
+      var y = cellToDie[1]
+      var cellState = self.cell.buildCellId(x, y)
+      cellState.attr('class', 'inactive')
+    })
+  }
+  self.cellsToStayAliveArray.forEach(function(liveCell){
     var x = liveCell[0]
     var y = liveCell[1]
     var cellState = self.cell.buildCellId(x, y)
