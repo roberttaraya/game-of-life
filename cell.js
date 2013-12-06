@@ -55,19 +55,19 @@ Cell.prototype.findNeighborsForCornerCell = function(x, y){
 }
 
 Cell.prototype.findNeighborsForTopEdgeCells = function(x, y){
-  return [[x, y-1], [x+1, y-1], [x+1, y], [x+1, y+1], [x, y+1]]
+  return [[x, y-1], [x+1, y-1], [x+1, y], [x+1, y+1], [x, y+1], [this.maxRows, y-1], [this.maxRows, y], [this.maxRows, y+1] ]
 }
 
 Cell.prototype.findNeighborsForBottomEdgeCells = function(x, y){
-  return [[x, y-1], [x-1, y-1], [x-1, y], [x-1, y+1], [x, y+1]]
+  return [[x, y-1], [x-1, y-1], [x-1, y], [x-1, y+1], [x, y+1], [1, y-1], [1, y], [1, y+1] ]
 }
 
 Cell.prototype.findNeighborsForRightEdgeCells = function(x, y){
-  return [[x-1, y], [x-1, y-1], [x, y-1], [x+1, y-1], [x+1, y]]
+  return [[x-1, y], [x-1, y-1], [x, y-1], [x+1, y-1], [x+1, y], [x-1, 1], [x, 1], [x+1, 1]]
 }
 
 Cell.prototype.findNeighborsForLeftEdgeCells = function(x, y){
-  return [[x-1, y], [x-1, y+1], [x, y+1], [x+1, y+1], [x+1, y]]
+  return [[x-1, y], [x-1, y+1], [x, y+1], [x+1, y+1], [x+1, y], [x-1, this.maxCols], [x, this.maxCols], [x+1, this.maxCols]]
 }
 
 Cell.prototype.findNeighborsForCenterCells = function(x, y){
