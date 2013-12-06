@@ -1,30 +1,52 @@
 var Game = function(){
-  this.timeInterval = 500
-  this.maxRows = 80
-  this.maxCols = 160
+  this.timeInterval = 300
+  this.maxRows = 60
+  this.maxCols = 140
   this.cell = new Cell(this.maxRows, this.maxCols)
   this.board = new Board(this.maxRows, this.maxCols)
+  this.cellsToStayAliveArray = []
+  this.cellsToDieArray = []
   this.runIT(this.maxRows, this.maxCols)
 }
 
 Game.prototype.cellLiveOrDie = function(){
-  var cellsToStayAliveArray = []
-  for (var x=1; x<=this.maxRows; x++){
-    for (var y=1; y<=this.maxCols; y++){
-      var liveCellCount = this.cell.findLiveNeighbors(x,y)
-      var cellInQuestion = this.cell.buildCellId(x, y)
-      if (cellInQuestion.attr('class')==='active'){
-        if (liveCellCount === 2 || liveCellCount === 3){
-          cellsToStayAliveArray.push([x,y])
-        }
-      } else {
-        if (liveCellCount === 3){
-          cellsToStayAliveArray.push([x,y])
+  var self = this
+  var toStayAliveArray = []
+  var toDieArray = []
+  self.cellsToStayAliveArray.forEach(function(liveCell){
+    var x = liveCell[0]
+    var y = liveCell[1]
+    self.cell.findLiveNeighbors(x,y)
+    var liveCellCount = self.cell.findLiveNeighbors(x,y)
+    var cellInQuestion = self.cell.buildCellId(x,y)
+    if (cellInQuestion.attr('class')==='active'){
+      if (liveCellCount === 2 || liveCellCount === 3){
+        toStayAliveArray.push([x,y])
+      } else if (liveCellCount < 2){
+        toDieArray.push([x,y])
+      } else if (liveCellCount>3){
+        toDieArray.push([x,y])
+      }
+    } else {
+      if (liveCellCount === 3){
+        toStayAliveArray.push([x,y])
+      }
+    }
+  })
+  for (var x=1; x<=self.maxRows; x++){
+    for (var y=1; y<=self.maxCols; y++){
+      var cellInQuestion = self.cell.buildCellId(x,y)
+      if (cellInQuestion.attr('class')==='inactive'){
+        var liveCellCount = self.cell.findLiveNeighbors(x,y)
+        if (liveCellCount===3){
+          toStayAliveArray.push([x,y])
         }
       }
     }
   }
-  this.setLiveCellState(cellsToStayAliveArray)
+  self.cellsToDieArray = toDieArray
+  self.cellsToStayAliveArray = toStayAliveArray
+  self.setCellState()
 }
 
 Game.prototype.runIT = function(rows, cols){
@@ -34,12 +56,12 @@ Game.prototype.runIT = function(rows, cols){
   // while(oldTable !== newTable){
   // for (var i = 1; i <= 1000; i++){
   var self = this
-  // var initialCellStateArray = this.randomInitialCellState()
-  // var initialCellStateArray = this.gliderInitialCellState()
-  var initialCellStateArray = this.acornInitialCellState()
-  // var initialCellStateArray = this.rPentominoInitialCellState()
-  // var initialCellStateArray = this.gosperGliderGunInitialCellState()
-  this.setLiveCellState(initialCellStateArray)
+  // this.cellsToStayAliveArray = this.randomInitialCellState()
+  // this.cellsToStayAliveArray = this.gliderInitialCellState()
+  this.cellsToStayAliveArray = this.acornInitialCellState()
+  // this.cellsToStayAliveArray = this.rPentominoInitialCellState()
+  // this.cellsToStayAliveArray = this.gosperGliderGunInitialCellState()
+  this.setCellState()
   setInterval(function(){
     self.cellLiveOrDie()
     count += 1
@@ -60,7 +82,7 @@ Game.prototype.displayGenerationCounter = function(count){
 }
 
 Game.prototype.randomNum = function(){
-  var randomNum = Math.floor( Math.random() * 15 )+1
+  var randomNum = Math.floor( Math.random() * 5 )+1
   return randomNum
 }
 
@@ -113,10 +135,19 @@ Game.prototype.gosperGliderGunInitialCellState = function(){
   return gosperGliderGunInitialCoordinates
 }
 
-Game.prototype.setLiveCellState = function(liveCellArray){
+Game.prototype.setCellState = function(){
   var self = this
-  this.board.clearGameTable()
-  liveCellArray.forEach(function(liveCell){
+  if (self.cellsToDieArray.length===0){
+    self.board.clearGameTable()
+  } else {
+    self.cellsToDieArray.forEach(function(cellToDie){
+      var x = cellToDie[0]
+      var y = cellToDie[1]
+      var cellState = self.cell.buildCellId(x, y)
+      cellState.attr('class', 'inactive')
+    })
+  }
+  self.cellsToStayAliveArray.forEach(function(liveCell){
     var x = liveCell[0]
     var y = liveCell[1]
     var cellState = self.cell.buildCellId(x, y)

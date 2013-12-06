@@ -5,7 +5,7 @@ var Board = function(maxRows, maxCols){
 }
 
 Board.prototype.createGameTable = function(rows,cols){
-  tableElement = "<table id='game-table' border='3'></table>"
+  tableElement = "<table id='game-table'></table>"
   divContainer = $('#game-container')
   divContainer.html(tableElement)
   this.createRowsAndColsOfGameTable(rows,cols)
