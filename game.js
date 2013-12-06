@@ -36,9 +36,9 @@ Game.prototype.runIT = function(rows, cols){
   var self = this
   // var initialCellStateArray = this.randomInitialCellState()
   // var initialCellStateArray = this.gliderInitialCellState()
-  // var initialCellStateArray = this.acornInitialCellState()
+  var initialCellStateArray = this.acornInitialCellState()
   // var initialCellStateArray = this.rPentominoInitialCellState()
-  var initialCellStateArray = this.gosperGliderGunInitialCellState()
+  // var initialCellStateArray = this.gosperGliderGunInitialCellState()
   this.setLiveCellState(initialCellStateArray)
   setInterval(function(){
     self.cellLiveOrDie()
