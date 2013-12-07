@@ -101,9 +101,15 @@ Game.prototype.randomInitialCellState = function(){
 
 Game.prototype.gliderInitialCellState = function(){
   var x = this.maxRows/2
-  var y = this.maxCols/2
-  var acornInitialCoordinates = [ [x-1, y], [x, y+1], [x+1, y-1], [x+1, y], [x+1, y+1] ]
-  return acornInitialCoordinates
+  var gliderYPositionsArray = [20, 40, 60, 80, 100, 120]
+  var gliderMultipleCoordinates = []
+  gliderYPositionsArray.forEach(function(y){
+    var gliderInitialCoordinates = [ [x-1, y], [x, y+1], [x+1, y-1], [x+1, y], [x+1, y+1] ]
+    gliderInitialCoordinates.forEach(function(coordArray){
+      gliderMultipleCoordinates.push(coordArray)
+    })
+  })
+  return gliderMultipleCoordinates
 }
 
 Game.prototype.acornInitialCellState = function(){
