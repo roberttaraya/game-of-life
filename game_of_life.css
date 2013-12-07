@@ -15,7 +15,6 @@ div {
   width: 1200px;
   margin: 0 0 0 0;
   padding: 0 0 0 0;
-  border: 1px solid black;
 }
 
 #controls{
@@ -23,16 +22,14 @@ div {
   margin: 0 0 0 0;
   padding: 0 0 0 0;
   position: absolute;
-  border: 1px solid black;
 }
 
 #generation-container{
-  width: 225px;
+  width: 300px;
   position: relative;
   float: left;
   margin: 0 0 0 0;
-  padding: 0 0 0 0;
-  border: 1px solid black;
+  padding: 10px 0;
   display: inline;
 }
 
@@ -40,27 +37,48 @@ div {
   margin: 0 0 0 0;
   padding: 0 0 0 0;
   position: relative;
-  width: 800px;
-  float: right;
-  border: 1px solid black;
+  width: 821px;
+  float: left;
 }
 
 ul{
-  margin: 0 0 0 0;
+  width: 821px;
+  margin: auto;
   padding: 0 0 0 0;
   float: left;
   list-style: none;
+  display: inline;
 }
 
 ul li {
-  float: left;
-  border: 1px solid black;
-  padding: 0 20px;
+  float: right;
+  padding: 2px 0 0;
+}
+
+ul li a:hover{
+  background-color: black;
+  color: white;
+}
+
+ul li h4{
+  margin:0 0 0 0;
+  padding:0 0 0 0;
+}
+
+a {
+  display: block;
+  padding: 10px 35px;
+}
+
+h4 {
+  margin: 0 0 0 0;
+  text-align:left;
+  padding: 0 10px;
 }
 
 table {
   font-size: 12px;
-  border: 1px solid white;
+  border: 1px solid #ddd;
   background-color: white;
 }
 
