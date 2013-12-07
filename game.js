@@ -55,8 +55,6 @@ Game.prototype.cellLiveOrDie = function(){
 }
 
 Game.prototype.runIT = function(rows, cols){
-  // var oldTable = ""
-  // var newTable = document.getElementById("game-table")
   var self = this
   this.setCellState()
 
@@ -74,14 +72,6 @@ Game.prototype.runIT = function(rows, cols){
     self.resetControlPanel()
     self.initializeEventListeners()
   })
-
-
-  // while(oldTable !== newTable){
-  // for (var i = 1; i <= 1000; i++){
-  // myIntervalVariable(count)
-    // oldTable = newTable
-    // newTable = document.getElementById("game-table")
-  // }
 }
 
 Game.prototype.resetControlPanel = function(){
