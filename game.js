@@ -2,11 +2,16 @@ var Game = function(){
   this.timeInterval = 300
   this.maxRows = 60
   this.maxCols = 140
+  this.generationCount = 0
   this.cell = new Cell(this.maxRows, this.maxCols)
   this.board = new Board(this.maxRows, this.maxCols)
+  this.initializeCellArrays()
+  this.initializeEventListeners()
+}
+
+Game.prototype.initializeCellArrays = function(){
   this.cellsToStayAliveArray = []
   this.cellsToDieArray = []
-  this.runIT(this.maxRows, this.maxCols)
 }
 
 Game.prototype.cellLiveOrDie = function(){
