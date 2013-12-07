@@ -57,32 +57,45 @@ Game.prototype.cellLiveOrDie = function(){
 Game.prototype.runIT = function(rows, cols){
   // var oldTable = ""
   // var newTable = document.getElementById("game-table")
-  var count = 0
+  var self = this
+  this.setCellState()
+
+  var myIntervalVariable = setInterval(function(){
+      self.cellLiveOrDie()
+      self.generationCount += 1
+      self.displayGenerationCounter(self.generationCount)
+    }, self.timeInterval)
+
+  var resetHandler = $("body").on('click', '#reset', function(){
+    clearInterval(myIntervalVariable)
+    self.initializeCellArrays()
+    self.setCellState()
+    console.log("i'm in the resetHandler")
+    self.resetControlPanel()
+    self.initializeEventListeners()
+  })
+
+
   // while(oldTable !== newTable){
   // for (var i = 1; i <= 1000; i++){
-  var self = this
-  // this.cellsToStayAliveArray = this.randomInitialCellState()
-  // this.cellsToStayAliveArray = this.gliderInitialCellState()
-  this.cellsToStayAliveArray = this.acornInitialCellState()
-  // this.cellsToStayAliveArray = this.rPentominoInitialCellState()
-  // this.cellsToStayAliveArray = this.gosperGliderGunInitialCellState()
-  this.setCellState()
-  setInterval(function(){
-    self.cellLiveOrDie()
-    count += 1
-    self.displayGenerationCounter(count)
-  }, this.timeInterval)
+  // myIntervalVariable(count)
     // oldTable = newTable
     // newTable = document.getElementById("game-table")
   // }
 }
 
+Game.prototype.resetControlPanel = function(){
+  var panel = $("#generation-container")
+  output = "<h4>Pick A Pattern to Start -----></h4>"
+  panel.html(output)
+}
+
 Game.prototype.displayGenerationCounter = function(count){
   var counter = $("#generation-container")
   var output = ""
-  output = output + "<h2>"
+  output = output + "<h4>"
   output = output + "Generation: " + count
-  output = output + "</h2>"
+  output = output + "</h4>"
   counter.html(output)
 }
 
