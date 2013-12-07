@@ -160,3 +160,59 @@ Game.prototype.setCellState = function(){
     cellState.attr('class', 'active')
   })
 }
+
+Game.prototype.initializeGliderPattern = function(){
+  this.cellsToStayAliveArray = this.gliderInitialCellState()
+  this.runIT(this.maxRows, this.maxCols)
+}
+
+Game.prototype.initializeAcornPattern = function(){
+  this.cellsToStayAliveArray = this.acornInitialCellState()
+  this.runIT(this.maxRows, this.maxCols)
+}
+
+Game.prototype.initializeRPentominoPattern = function(){
+  this.cellsToStayAliveArray = this.rPentominoInitialCellState()
+  this.runIT(this.maxRows, this.maxCols)
+}
+
+Game.prototype.initializeGosperGliderGunPattern = function(){
+  this.cellsToStayAliveArray = this.gosperGliderGunInitialCellState()
+  this.runIT(this.maxRows, this.maxCols)
+}
+
+Game.prototype.initializeRandomPattern = function(){
+  this.cellsToStayAliveArray = this.randomInitialCellState()
+  this.runIT(this.maxRows, this.maxCols)
+}
+
+Game.prototype.initializeEventListeners = function(){
+  var self = this
+
+  $("body").on('click', '#glider', function(){
+    self.stopEventListeners()
+    self.initializeGliderPattern()
+  })
+
+  $("body").on('click', '#acorn', function(){
+    self.stopEventListeners()
+    self.initializeAcornPattern()
+  })
+
+  $("body").on('click', '#gosper', function(){
+    self.stopEventListeners()
+    self.initializeGosperGliderGunPattern()
+  })
+
+  $("body").on('click', '#random', function(){
+    self.stopEventListeners()
+    self.initializeRandomPattern()
+  })
+}
+
+Game.prototype.stopEventListeners = function(){
+  $("body").off('click', "#glider")
+  $("body").off('click', "#acorn")
+  $("body").off('click', "#gosper")
+  $("body").off('click', "#random")
+}
