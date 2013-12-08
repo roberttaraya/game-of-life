@@ -18,7 +18,7 @@ Game.prototype.cellLiveOrDie = function(){
   var self = this
   var toStayAliveArray = []
   var toDieArray = []
-  self.cellsToStayAliveArray.forEach(function(liveCell){
+  this.cellsToStayAliveArray.forEach(function(liveCell){
     var x = liveCell[0]
     var y = liveCell[1]
     self.cell.findLiveNeighbors(x,y)
@@ -38,20 +38,20 @@ Game.prototype.cellLiveOrDie = function(){
       }
     }
   })
-  for (var x=1; x<=self.maxRows; x++){
-    for (var y=1; y<=self.maxCols; y++){
-      var cellInQuestion = self.cell.buildCellId(x,y)
+  for (var x=1; x<=this.maxRows; x++){
+    for (var y=1; y<=this.maxCols; y++){
+      var cellInQuestion = this.cell.buildCellId(x,y)
       if (cellInQuestion.attr('class')==='inactive'){
-        var liveCellCount = self.cell.findLiveNeighbors(x,y)
+        var liveCellCount = this.cell.findLiveNeighbors(x,y)
         if (liveCellCount===3){
           toStayAliveArray.push([x,y])
         }
       }
     }
   }
-  self.cellsToDieArray = toDieArray
-  self.cellsToStayAliveArray = toStayAliveArray
-  self.setCellState()
+  this.cellsToDieArray = toDieArray
+  this.cellsToStayAliveArray = toStayAliveArray
+  this.setCellState()
 }
 
 Game.prototype.runIT = function(rows, cols){
@@ -153,17 +153,17 @@ Game.prototype.gosperGliderGunInitialCellState = function(){
 
 Game.prototype.setCellState = function(){
   var self = this
-  if (self.cellsToDieArray.length===0){
-    self.board.clearGameTable()
+  if (this.cellsToDieArray.length===0){
+    this.board.clearGameTable()
   } else {
-    self.cellsToDieArray.forEach(function(cellToDie){
+    this.cellsToDieArray.forEach(function(cellToDie){
       var x = cellToDie[0]
       var y = cellToDie[1]
       var cellState = self.cell.buildCellId(x, y)
       cellState.attr('class', 'inactive')
     })
   }
-  self.cellsToStayAliveArray.forEach(function(liveCell){
+  this.cellsToStayAliveArray.forEach(function(liveCell){
     var x = liveCell[0]
     var y = liveCell[1]
     var cellState = self.cell.buildCellId(x, y)
