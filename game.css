@@ -6,6 +6,21 @@ div {
   margin: 5em;
 }
 
+h1 a{
+  margin:0 0 0 0;
+  padding:0 0 0 0;
+  text-decoration: none;
+  color: black;
+}
+
+h1 a:hover{
+  margin:0 0 0 0;
+  padding:0 0 0 0;
+  text-decoration: none;
+  color: white;
+  -webkit-text-stroke: 2px black;
+}
+
 #container{
   margin: 10px;
   padding: 0 0 0 0;
