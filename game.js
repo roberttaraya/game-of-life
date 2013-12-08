@@ -1,5 +1,5 @@
 var Game = function(){
-  this.timeInterval = 300
+  this.timeInterval = 400
   this.maxRows = 60
   this.maxCols = 140
   this.generationCount = 0
