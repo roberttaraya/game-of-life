@@ -1,9 +1,11 @@
 game-of-life
 ============
 
-This is my attempt at simulating Conway's Game of Life in Javascript
+This is my attempt at simulating Conway's Game of Life in Javascript.
 
-![Game of Life Screenshot](/Screen-Shot-2013-12-07.png)
+See it run at ![http://roberttaraya.github.io/game-of-life/game.html](http://roberttaraya.github.io/game-of-life/game.html)
+
+![Game of Life Screenshot](/images/Screen-Shot-2013-12-07.png)
 
 From Wikipedia
 --------------
