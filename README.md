@@ -3,7 +3,7 @@ game-of-life
 
 This is my attempt at simulating Conway's Game of Life in Javascript.
 
-See it run at ![http://roberttaraya.github.io/game-of-life/game.html](http://roberttaraya.github.io/game-of-life/game.html)
+See it run at [http://roberttaraya.github.io/game-of-life/game.html](http://roberttaraya.github.io/game-of-life/game.html)
 
 ![Game of Life Screenshot](/images/Screen-Shot-2013-12-07.png)
 
