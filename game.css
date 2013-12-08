@@ -67,7 +67,6 @@ ul{
 
 ul li {
   float: right;
-  padding: 2px 0 0;
 }
 
 ul li a:hover{
@@ -82,7 +81,7 @@ ul li h4{
 
 a {
   display: block;
-  padding: 10px 35px;
+  padding: 10px 25px;
 }
 
 h4 {

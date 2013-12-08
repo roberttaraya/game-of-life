@@ -214,6 +214,11 @@ Game.prototype.initializeEventListeners = function(){
     self.initializeGosperGliderGunPattern()
   })
 
+  $("body").on('click', '#rpentomino', function(){
+    self.stopEventListeners()
+    self.initializeRPentominoPattern()
+  })
+
   $("body").on('click', '#random', function(){
     self.stopEventListeners()
     self.initializeRandomPattern()
@@ -224,5 +229,6 @@ Game.prototype.stopEventListeners = function(){
   $("body").off('click', "#glider")
   $("body").off('click', "#acorn")
   $("body").off('click', "#gosper")
+  $("body").off('click', "#rpentomino")
   $("body").off('click', "#random")
 }
