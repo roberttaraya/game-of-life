@@ -2,18 +2,23 @@ var Game = function(){
   this.timeInterval = 300
   this.maxRows = 60
   this.maxCols = 140
+  this.generationCount = 0
   this.cell = new Cell(this.maxRows, this.maxCols)
   this.board = new Board(this.maxRows, this.maxCols)
+  this.initializeCellArrays()
+  this.initializeEventListeners()
+}
+
+Game.prototype.initializeCellArrays = function(){
   this.cellsToStayAliveArray = []
   this.cellsToDieArray = []
-  this.runIT(this.maxRows, this.maxCols)
 }
 
 Game.prototype.cellLiveOrDie = function(){
   var self = this
   var toStayAliveArray = []
   var toDieArray = []
-  self.cellsToStayAliveArray.forEach(function(liveCell){
+  this.cellsToStayAliveArray.forEach(function(liveCell){
     var x = liveCell[0]
     var y = liveCell[1]
     self.cell.findLiveNeighbors(x,y)
@@ -33,56 +38,61 @@ Game.prototype.cellLiveOrDie = function(){
       }
     }
   })
-  for (var x=1; x<=self.maxRows; x++){
-    for (var y=1; y<=self.maxCols; y++){
-      var cellInQuestion = self.cell.buildCellId(x,y)
+  for (var x=1; x<=this.maxRows; x++){
+    for (var y=1; y<=this.maxCols; y++){
+      var cellInQuestion = this.cell.buildCellId(x,y)
       if (cellInQuestion.attr('class')==='inactive'){
-        var liveCellCount = self.cell.findLiveNeighbors(x,y)
+        var liveCellCount = this.cell.findLiveNeighbors(x,y)
         if (liveCellCount===3){
           toStayAliveArray.push([x,y])
         }
       }
     }
   }
-  self.cellsToDieArray = toDieArray
-  self.cellsToStayAliveArray = toStayAliveArray
-  self.setCellState()
+  this.cellsToDieArray = toDieArray
+  this.cellsToStayAliveArray = toStayAliveArray
+  this.setCellState()
 }
 
 Game.prototype.runIT = function(rows, cols){
-  // var oldTable = ""
-  // var newTable = document.getElementById("game-table")
-  var count = 0
-  // while(oldTable !== newTable){
-  // for (var i = 1; i <= 1000; i++){
   var self = this
-  // this.cellsToStayAliveArray = this.randomInitialCellState()
-  // this.cellsToStayAliveArray = this.gliderInitialCellState()
-  this.cellsToStayAliveArray = this.acornInitialCellState()
-  // this.cellsToStayAliveArray = this.rPentominoInitialCellState()
-  // this.cellsToStayAliveArray = this.gosperGliderGunInitialCellState()
   this.setCellState()
-  setInterval(function(){
-    self.cellLiveOrDie()
-    count += 1
-    self.displayGenerationCounter(count)
-  }, this.timeInterval)
-    // oldTable = newTable
-    // newTable = document.getElementById("game-table")
-  // }
+  function runInterval(){
+    var myIntervalVariable = setInterval(function(){
+      self.cellLiveOrDie()
+      self.generationCount += 1
+      self.displayGenerationCounter()
+    }, self.timeInterval)
+
+    var resetHandler = $("body").on('click', '#reset', function(){
+      clearInterval(myIntervalVariable)
+      self.initializeCellArrays()
+      self.setCellState()
+      self.resetControlPanel()
+      self.initializeEventListeners()
+    })
+  }
+  setTimeout(function(){runInterval()}, 2000)
 }
 
-Game.prototype.displayGenerationCounter = function(count){
+Game.prototype.resetControlPanel = function(){
+  var panel = $("#generation-container")
+  output = "<h4>Pick A Pattern to Start -----></h4>"
+  panel.html(output)
+  this.generationCount = 0
+}
+
+Game.prototype.displayGenerationCounter = function(){
   var counter = $("#generation-container")
   var output = ""
-  output = output + "<h2>"
-  output = output + "Generation: " + count
-  output = output + "</h2>"
+  output += "<h4>"
+  output += "Generation: " + this.generationCount
+  output += "</h4>"
   counter.html(output)
 }
 
 Game.prototype.randomNum = function(){
-  var randomNum = Math.floor( Math.random() * 5 )+1
+  var randomNum = Math.floor( Math.random() * 10 )+1
   return randomNum
 }
 
@@ -101,9 +111,15 @@ Game.prototype.randomInitialCellState = function(){
 
 Game.prototype.gliderInitialCellState = function(){
   var x = this.maxRows/2
-  var y = this.maxCols/2
-  var acornInitialCoordinates = [ [x-1, y], [x, y+1], [x+1, y-1], [x+1, y], [x+1, y+1] ]
-  return acornInitialCoordinates
+  var gliderYPositionsArray = [20, 40, 60, 80, 100, 120]
+  var gliderMultipleCoordinates = []
+  gliderYPositionsArray.forEach(function(y){
+    var gliderInitialCoordinates = [ [x-1, y], [x, y+1], [x+1, y-1], [x+1, y], [x+1, y+1] ]
+    gliderInitialCoordinates.forEach(function(coordArray){
+      gliderMultipleCoordinates.push(coordArray)
+    })
+  })
+  return gliderMultipleCoordinates
 }
 
 Game.prototype.acornInitialCellState = function(){
@@ -137,20 +153,76 @@ Game.prototype.gosperGliderGunInitialCellState = function(){
 
 Game.prototype.setCellState = function(){
   var self = this
-  if (self.cellsToDieArray.length===0){
-    self.board.clearGameTable()
+  if (this.cellsToDieArray.length===0){
+    this.board.clearGameTable()
   } else {
-    self.cellsToDieArray.forEach(function(cellToDie){
+    this.cellsToDieArray.forEach(function(cellToDie){
       var x = cellToDie[0]
       var y = cellToDie[1]
       var cellState = self.cell.buildCellId(x, y)
       cellState.attr('class', 'inactive')
     })
   }
-  self.cellsToStayAliveArray.forEach(function(liveCell){
+  this.cellsToStayAliveArray.forEach(function(liveCell){
     var x = liveCell[0]
     var y = liveCell[1]
     var cellState = self.cell.buildCellId(x, y)
     cellState.attr('class', 'active')
   })
+}
+
+Game.prototype.initializeGliderPattern = function(){
+  this.cellsToStayAliveArray = this.gliderInitialCellState()
+  this.runIT(this.maxRows, this.maxCols)
+}
+
+Game.prototype.initializeAcornPattern = function(){
+  this.cellsToStayAliveArray = this.acornInitialCellState()
+  this.runIT(this.maxRows, this.maxCols)
+}
+
+Game.prototype.initializeRPentominoPattern = function(){
+  this.cellsToStayAliveArray = this.rPentominoInitialCellState()
+  this.runIT(this.maxRows, this.maxCols)
+}
+
+Game.prototype.initializeGosperGliderGunPattern = function(){
+  this.cellsToStayAliveArray = this.gosperGliderGunInitialCellState()
+  this.runIT(this.maxRows, this.maxCols)
+}
+
+Game.prototype.initializeRandomPattern = function(){
+  this.cellsToStayAliveArray = this.randomInitialCellState()
+  this.runIT(this.maxRows, this.maxCols)
+}
+
+Game.prototype.initializeEventListeners = function(){
+  var self = this
+
+  $("body").on('click', '#glider', function(){
+    self.stopEventListeners()
+    self.initializeGliderPattern()
+  })
+
+  $("body").on('click', '#acorn', function(){
+    self.stopEventListeners()
+    self.initializeAcornPattern()
+  })
+
+  $("body").on('click', '#gosper', function(){
+    self.stopEventListeners()
+    self.initializeGosperGliderGunPattern()
+  })
+
+  $("body").on('click', '#random', function(){
+    self.stopEventListeners()
+    self.initializeRandomPattern()
+  })
+}
+
+Game.prototype.stopEventListeners = function(){
+  $("body").off('click', "#glider")
+  $("body").off('click', "#acorn")
+  $("body").off('click', "#gosper")
+  $("body").off('click', "#random")
 }
