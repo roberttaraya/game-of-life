@@ -57,27 +57,29 @@ Game.prototype.cellLiveOrDie = function(){
 Game.prototype.runIT = function(rows, cols){
   var self = this
   this.setCellState()
-
-  var myIntervalVariable = setInterval(function(){
+  function runInterval(){
+    var myIntervalVariable = setInterval(function(){
       self.cellLiveOrDie()
       self.generationCount += 1
       self.displayGenerationCounter(self.generationCount)
     }, self.timeInterval)
 
-  var resetHandler = $("body").on('click', '#reset', function(){
-    clearInterval(myIntervalVariable)
-    self.initializeCellArrays()
-    self.setCellState()
-    console.log("i'm in the resetHandler")
-    self.resetControlPanel()
-    self.initializeEventListeners()
-  })
+    var resetHandler = $("body").on('click', '#reset', function(){
+      clearInterval(myIntervalVariable)
+      self.initializeCellArrays()
+      self.setCellState()
+      self.resetControlPanel()
+      self.initializeEventListeners()
+    })
+  }
+  setTimeout(function(){runInterval()}, 2000)
 }
 
 Game.prototype.resetControlPanel = function(){
   var panel = $("#generation-container")
   output = "<h4>Pick A Pattern to Start -----></h4>"
   panel.html(output)
+  this.generationCount = 0
 }
 
 Game.prototype.displayGenerationCounter = function(count){
