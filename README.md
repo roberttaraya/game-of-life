@@ -3,7 +3,7 @@ game_of_life
 
 This is my attempt at simulating Conway's Game of Life in Javascript
 
-![Game of Life Screenshot](/Screen Shot 2013-11-23 at 11.01.37 AM.png)
+![Game of Life Screenshot](/Screen Shot 2013-12-07.png)
 
 From Wikipedia
 --------------
