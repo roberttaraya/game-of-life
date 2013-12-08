@@ -61,7 +61,7 @@ Game.prototype.runIT = function(rows, cols){
     var myIntervalVariable = setInterval(function(){
       self.cellLiveOrDie()
       self.generationCount += 1
-      self.displayGenerationCounter(self.generationCount)
+      self.displayGenerationCounter()
     }, self.timeInterval)
 
     var resetHandler = $("body").on('click', '#reset', function(){
@@ -82,17 +82,17 @@ Game.prototype.resetControlPanel = function(){
   this.generationCount = 0
 }
 
-Game.prototype.displayGenerationCounter = function(count){
+Game.prototype.displayGenerationCounter = function(){
   var counter = $("#generation-container")
   var output = ""
-  output = output + "<h4>"
-  output = output + "Generation: " + count
-  output = output + "</h4>"
+  output += "<h4>"
+  output += "Generation: " + this.generationCount
+  output += "</h4>"
   counter.html(output)
 }
 
 Game.prototype.randomNum = function(){
-  var randomNum = Math.floor( Math.random() * 5 )+1
+  var randomNum = Math.floor( Math.random() * 10 )+1
   return randomNum
 }
 
